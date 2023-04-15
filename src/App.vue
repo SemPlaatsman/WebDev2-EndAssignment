@@ -1,21 +1,21 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <Navigation />
+  <router-view />
+  <Footer />
 </template>
+
+<script>
+import Navigation from './components/Navigation.vue';
+import Footer from './components/Footer.vue';
+
+export default {
+  name: "App",
+  components: {
+    Navigation,
+    Footer
+  }
+};
+</script>
 
 <style scoped>
 header {
