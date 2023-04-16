@@ -5,12 +5,13 @@
 </template>
 
 <script>
-import axios from '../axios-auth';
+console.log();
+import { axiosMySQL } from '../axios-auth';
 
 export default {
     name: "Home",
     mounted() {
-        axios.get('products')
+        axiosMySQL.get('products')
         .then(result => console.log(result))
         .catch(error => console.log(error))
     }
