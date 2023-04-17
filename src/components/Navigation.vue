@@ -19,7 +19,7 @@ export default {
 
 <style scoped>
 nav {
-  background-color: var(--primary-blue);
+  background-color: var(--primary-green);
   height: 75px;
 }
 

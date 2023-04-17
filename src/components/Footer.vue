@@ -14,10 +14,8 @@ export default {
 
 <style scoped>
 footer {
-    background-color: var(--primary-blue);
-    position: fixed;
+    background-color: var(--primary-green);
     height: 50px;
     width: 100%;
-    bottom: 0;
 }
 </style>

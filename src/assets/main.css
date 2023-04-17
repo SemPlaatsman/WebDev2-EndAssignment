@@ -1,5 +1,5 @@
 :root {
-  --primary-blue: #13aa52;
+  --primary-green: #13aa52;
 }
 
 body {
@@ -10,7 +10,7 @@ body {
   background-size: 100%;
 }
 
-.container {
+#app > .container {
   background-color: white;
-  height: calc(100% - 75px);
+  min-height: calc(100% - 75px);
 }
