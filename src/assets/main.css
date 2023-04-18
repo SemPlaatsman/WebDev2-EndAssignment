@@ -12,5 +12,5 @@ body {
 
 #app > .container {
   background-color: white;
-  min-height: calc(100% - 75px);
+  min-height: calc(100vh - 125px); /* 75px for navigation + 50px for footer */
 }

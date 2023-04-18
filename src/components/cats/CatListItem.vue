@@ -3,7 +3,7 @@
         <article class="card flex-fill">
             <section class="card border-0 h-100 align-items-center">
                 <a href="/">
-                    <img :src="`https://cdn2.thecatapi.com/images/${cat.id}.jpg`" alt="Cat cover">
+                    <img :src="cat.url" alt="Cat cover">
                 </a>
                 <section class="card-body w-100">
                     <h5 class="card-title">{{ cat.breeds[0].name }}</h5>
@@ -11,7 +11,7 @@
                 </section>
             </section>
             <section class="card-footer d-flex w-100">
-                <a href="/books?id=<?= $book->getId(); ?>" class="btn btn-secondary me-auto">Read further...</a>
+                <a :href="`/cats/${cat.id}`" class="btn btn-primary me-auto">Read more...</a>
             </section>
         </article>
     </section>
@@ -21,7 +21,10 @@
 export default {
     name: "CatListItem",
     props: {
-        cat: Object
+        cat: {
+            type: Object,
+            default: null
+        }
     }
 }
 </script>

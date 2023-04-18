@@ -14,7 +14,7 @@ export default {
         try {
             const result = await axiosCatAPI.get('images/search?has_breeds=1&limit=15');
             const cats = result.data.filter(function(cat) {
-                return (cat.hasOwnProperty('prop') && cat.hasOwnProperty('prop') && cat.hasOwnProperty('prop') && cat.hasOwnProperty('prop'))
+                return (cat.hasOwnProperty('id') && cat.hasOwnProperty('url') && cat.breeds[0].hasOwnProperty('temperament') && cat.breeds[0].hasOwnProperty('name') && cat.breeds[0].hasOwnProperty('description'))
             });
             return {
                 cats
