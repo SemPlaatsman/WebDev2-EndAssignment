@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-const axiosMySQL = axios.create({
+const axiosTFFDB = axios.create({
     baseURL: 'http://localhost/'
 });
 
 const axiosCatAPI = axios.create({
     baseURL: 'https://api.thecatapi.com/v1/',
-    headers: { 'X-Api-Key': 'live_JK88rjTccdUAGChLDEGxkv0szRwkhweRzXbbNQEaAkvtGyg6vKjpObtUEom7FRHO' }
+    headers: { 'X-Api-Key': import.meta.env.VITE_CAT_API_KEY }
 })
 
-export { axiosMySQL, axiosCatAPI };
+export { axiosTFFDB, axiosCatAPI };

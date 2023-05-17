@@ -1,5 +1,5 @@
 <template>
-    <footer class="bg-none text-center text-white">
+    <footer class="bg-none text-center text-white font-roboto-slab">
         <p class="d-flex justify-content-center align-items-center h-100">
           <span class="">© 2020 Copyright: Sem Plaatsman / 688208 / INF2A</span>
         </p>

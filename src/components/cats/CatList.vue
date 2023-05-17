@@ -12,7 +12,7 @@ export default {
     name: "CatList",
     async setup() {
         try {
-            const result = await axiosCatAPI.get('images/search?has_breeds=1&limit=15');
+            const result = await axiosCatAPI.get('images/search?has_breeds=1&limit=9');
             const cats = result.data.filter(function(cat) {
                 return (cat.hasOwnProperty('id') && cat.hasOwnProperty('url') && cat.breeds[0].hasOwnProperty('temperament') && cat.breeds[0].hasOwnProperty('name') && cat.breeds[0].hasOwnProperty('description'))
             });
