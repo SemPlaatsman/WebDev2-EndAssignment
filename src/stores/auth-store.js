@@ -25,7 +25,7 @@ export const userAuthStore = defineStore('auth', {
         async login(username, password) {
             return new Promise((resolve, reject) => {
                 // const result = await axiosTFFDB.post('users/login', { username: username, password: password });
-                const data = axiosTFFDB.post('users/login', { username: username, password: password })
+                axiosTFFDB.post('users/login', { username: username, password: password })
                 .then((res) => {
                     if (!res.data.jwt) {
                         throw new Error('Invalid login');
