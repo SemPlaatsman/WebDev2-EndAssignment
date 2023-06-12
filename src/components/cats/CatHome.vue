@@ -5,17 +5,17 @@
             Looking for a new four-legged roommate? The Felis Foundation can help you find the perfect match with everything we know about our little friends. 
             Don't wait; our cats are looking forward to meet you.
         </p>
+        <div>
+            <label for="page">Page: </label>
+            <input v-model="page" class="col-1 ms-3" min="1" type="number" id="page">
+        </div>
         <Suspense>
             <template #default>
-                <CatList />
+                <CatList :page="this.page" />
             </template>
             <template #fallback>
-                <section class="container d-flex justify-content-center align-items-center h-50">
-                    <section class="d-flex">
-                        <span class="fs-3">Loading</span>
-                        <pulse-loader class="mt-3" :loading="true" :color="green" size="12px" margin="4px" />
-                    </section>
-                </section>
+                <!-- Fallback loading indicator -->
+                <Loading />
             </template>
         </Suspense>
     </section>
@@ -23,13 +23,18 @@
 
 <script>
 import CatList from './CatList.vue';
-import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import Loading from './Loading.vue';
 
 export default {
     name: "CatHome",
     components: {
         CatList,
-        PulseLoader
+        Loading
+    },
+    data() {
+        return {
+            page: 1
+        }
     }
 }
 </script>

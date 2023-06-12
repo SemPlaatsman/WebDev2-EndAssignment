@@ -26,7 +26,7 @@ export default {
   },
   data() {
     return {
-        isAuthenticated: this.store.isAuthenticated
+        
     }
   },
   mounted() {
@@ -35,8 +35,13 @@ export default {
   },
   methods: {
     logout() {
-      localStorage.clear();
-      this.$router.push('/login');
+      this.store.logout();
+      this.$router.push('/');
+    }
+  },
+  computed: {
+    isAuthenticated() {
+      return this.store.isAuthenticated;
     }
   }
 }

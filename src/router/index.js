@@ -6,6 +6,7 @@ import Login from '../components/Login.vue';
 import Register from '../components/Register.vue';
 import CatHome from '../components/cats/CatHome.vue';
 import CatDetail from '../components/cats/CatDetail.vue';
+import LostAndFound from '../components/lostandfound/LostAndFound.vue';
 import Profile from '../components/Profile.vue';
 
 const router = createRouter({
@@ -16,6 +17,7 @@ const router = createRouter({
     { path: '/register', component: Register },
     { path: '/cats', component: CatHome },
     { path: '/cats/:id', component: CatDetail },
+    { path: '/lostandfound', component: LostAndFound },
     { path: '/profile', component: Profile, meta: { requiresAuth: true } }
   ],
   linkActiveClass: "active"

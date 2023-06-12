@@ -48,6 +48,21 @@ export const userAuthStore = defineStore('auth', {
                     reject(error.response.data.errorMessage);
                 });
             });
+        },
+        logout() {
+            this.jwt = '';
+            this.role = '';
+            this.username = '';
+            this.email = '';
+
+            localStorage.removeItem('jwt');
+            localStorage.removeItem('role');
+            localStorage.removeItem('username');
+            localStorage.removeItem('email');
+
+            localStorage.clear();
+
+            axiosTFFDB.defaults.headers.common['Authorization'] = '';
         }
     },
     created() {
