@@ -5,9 +5,9 @@
 </template>
 
 <script>
-    export default {
-        name: "LostAndFoundDetail"
-    }
+export default {
+    name: "LostAndFoundDetail"
+}
 </script>
 
 <style scoped>

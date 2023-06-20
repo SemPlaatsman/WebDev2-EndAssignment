@@ -23,7 +23,7 @@
 
 <script>
 import CatList from './CatList.vue';
-import Loading from './Loading.vue';
+import Loading from '../Loading.vue';
 
 export default {
     name: "CatHome",

@@ -7,7 +7,7 @@
 
 <script>
 import CatListItem from './CatListItem.vue';
-import Loading from './Loading.vue';
+import Loading from '../Loading.vue';
 import { axiosCatAPI } from '../../axios-auth';
 
 export default {
@@ -31,7 +31,7 @@ export default {
     watch: {
         'page'(newVal) {
             if (!newVal || newVal < 1) {
-                this.currentAccountPage = 1;
+                this.page = 1;
             }
             this.cats = [];
             this.getCatList()
@@ -53,11 +53,7 @@ export default {
                 console.log(error)
             }
         }
-    },
-    components: {
-    CatListItem,
-    Loading
-}
+    }
 }
 </script>
 

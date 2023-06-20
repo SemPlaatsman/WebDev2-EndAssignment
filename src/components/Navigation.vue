@@ -6,6 +6,7 @@
     <ul class="nav nav-pills">
       <li class="nav-item"><router-link to="/" class="nav-link">HOME</router-link></li>
       <li class="nav-item"><router-link to="/cats" class="nav-link">CATS</router-link></li>
+      <li class="nav-item"><router-link to="/lostandfound" class="nav-link">LOST & FOUND</router-link></li>
       <li v-if="isAuthenticated" class="nav-item"><router-link to="/profile" class="nav-link">PROFILE</router-link></li>
       <li v-if="isAuthenticated" class="nav-item"><a v-on:click="logout" href="#" class="nav-link">LOGOUT</a></li>
       <li v-if="!isAuthenticated" class="nav-item"><router-link to="/login" class="nav-link">LOGIN</router-link></li>
