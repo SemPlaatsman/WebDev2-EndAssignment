@@ -1,6 +1,6 @@
 <template>
     <section class="col-lg-4 col-md-6 col-sm-12 p-2 d-flex align-items-stretch">
-        <article class="card flex-fill">
+        <article class="border-3 border-black card flex-fill">
             <section class="card border-0 h-100 align-items-center">
                 <a href="/">
                     <img :src="cat.url" alt="Cat cover">
@@ -11,7 +11,7 @@
                 </section>
             </section>
             <section class="card-footer d-flex w-100">
-                <a :href="`/cats/${cat.id}`" class="btn btn-primary me-auto">Read more...</a>
+                <a :href="`/cats/${cat.id}`" class="btn text-white me-auto">Read more...</a>
             </section>
         </article>
     </section>
@@ -34,5 +34,9 @@ a > img {
     width: 100%;
     max-height: 200px;
     height: auto;
+}
+
+.card-footer > .btn {
+    background-color: var(--primary-green);
 }
 </style>

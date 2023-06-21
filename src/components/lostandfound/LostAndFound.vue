@@ -6,21 +6,39 @@
             We understand how distressing it can be when a beloved feline companion goes missing or when you come across a stray cat in need of help. 
             So together, let's ensure that every furry friend finds their way back or discovers a new loving family!
         </p>
-        <div>
+        <div class="pt-2">
             <label for="page">Page: </label>
-            <input v-model="page" class="col-1 ms-3" min="1" type="number" id="page">
+            <input v-model="page" class="col-1 mx-3" min="1" type="number" id="page">
+            <label for="limit">Limit: </label>
+            <input v-model="limit" class="col-1 mx-3" min="1" type="number" id="limit">
+            <label for="status">Status: </label>
+            <select v-model="status" class="col-2 mx-3 p-1" id="status">
+                <option value="">All</option>
+                <option v-for="(value, name) in this.catStatus" :value="value">
+                    {{ name.replace(/([a-z])([A-Z])/g, '$1 $2') }}
+                </option>
+            </select>
         </div>
-        <LostAndFoundList />
+        <LostAndFoundList :page="this.page" :limit="this.limit" :status="this.status" />
     </section>
 </template>
 
 <script>
+import { catStatus } from '../../assets/catstatus.js';
 import LostAndFoundList from './LostAndFoundList.vue';
 
 export default {
     name: "LostAndFound",
     components: {
         LostAndFoundList
+    },
+    data() {
+        return {
+            page: 1,
+            limit: 9,
+            status: '',
+            catStatus
+        }
     }
 }
 </script>

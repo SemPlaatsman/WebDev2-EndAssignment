@@ -1,5 +1,5 @@
 <template>
-    <section class="container row mx-auto py-4">
+    <section class="container row mx-auto py-4 border-black">
         <Loading v-if="this.cats.length === 0"/>
         <CatListItem v-else="this.cats.length > 0" v-for="cat in cats" :cat="cat" :key="cat.id"/>
     </section>
@@ -21,6 +21,11 @@ export default {
             type: Number,
             default: 1,
             required: true
+        },
+        limit: {
+            type: Number,
+            default: 9,
+            required: true
         }
     },
     data() {
@@ -35,6 +40,13 @@ export default {
             }
             this.cats = [];
             this.getCatList()
+        },
+        'limit'(newVal) {
+            if (!newVal || newVal < 1) {
+                this.limit = 9;
+            }
+            this.cats = [];
+            this.getCatList()
         }
     },
     created() {
@@ -43,7 +55,7 @@ export default {
     methods: {
         async getCatList() {
             try {
-                const result = await axiosCatAPI.get(('images/search?has_breeds=1&limit=9&order=ASC&page=' + (this.page ?? 1)));
+                const result = await axiosCatAPI.get(('images/search?has_breeds=1&order=ASC&page=' + (this.page ?? 1) + '&limit=' + (this.limit ?? 9)));
                 console.log(result)
                 const cats = result.data.filter(function(cat) {
                     return (cat.hasOwnProperty('id') && cat.hasOwnProperty('url') && cat.breeds[0].hasOwnProperty('temperament') && cat.breeds[0].hasOwnProperty('name') && cat.breeds[0].hasOwnProperty('description'))
