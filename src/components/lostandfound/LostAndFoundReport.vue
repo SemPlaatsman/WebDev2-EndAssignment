@@ -54,21 +54,27 @@
 </template>
 
 <script>
+import { userAuthStore } from '../../stores/auth-store';
+import { axiosTFFDB } from '../../axios-auth';
 import { catStatus, statusToName, nameToStatus } from '../../assets/catstatus';
 
 export default {
     name: "LostAndFoundReport",
+    setup() {
+        return { store: userAuthStore() };
+    },
     data() {
         return {
             catStatus,
             statusToName,
             reportData: {
-                status: nameToStatus(this.$route.params.status ?? "") ?? "0",
-                breeds: ['bob'],
+                status: nameToStatus(this.$route.params.status ?? "") ?? "",
+                breeds: [],
                 image: null,
-                description: 'noway'
+                description: ''
             },
-            error: ''
+            error: '',
+
         }
     },
     created() {
@@ -80,7 +86,32 @@ export default {
                 this.error = "Please select at least one breed!"
                 return;
             }
-            console.log(this.reportData);
+
+            const reader = new FileReader();
+            reader.readAsDataURL(this.reportData.image);
+            reader.onload = async () => {
+                const base64String = reader.result.replace(/^data:.+;base64,/, '');
+                this.reportData.userId = this.store.id;
+                this.reportData.imageFormat = 
+                this.reportData.encodedImage = base64String;
+                const reportRequestDTO = {
+                    userId: this.store.id,
+                    encodedImage: base64String,
+                    imageFormat: this.reportData.image.type.split("/")[1],
+                    breeds: this.reportData.breeds,
+                    description: this.reportData.description,
+                    status: this.reportData.status
+                };
+                
+                axiosTFFDB.post('cats', reportRequestDTO)
+                .then(response => {
+                    this.$router.push('/lostandfound');
+                })
+                .catch(error => {
+                    console.log(error);
+                    this.error = error.data.errorMessage;
+                })
+            };
         },
         addBreed() {
             if (this.newBreed.trim() !== '') {

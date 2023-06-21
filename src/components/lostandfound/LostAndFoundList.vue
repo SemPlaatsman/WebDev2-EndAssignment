@@ -4,7 +4,7 @@
         <!-- TODO: if no cats found so cats.length === 0; show a no cats found message -->
         <div v-else-if="this.cats.length === 0">
             <h1 class="text-center text-primary-green p-5 pb-0">Sorry!</h1>
-            <p class="text-center">
+            <p class="text-center pb-5">
                 I'm sorry but there are no cats to be found here...<br>
                 Have you looked under the couch?
             </p>
@@ -80,8 +80,9 @@ export default {
             axiosTFFDB.get(('cats?offset=' + (((this.page ?? 1) - 1) * this.limit) + '&limit=' + (this.limit ?? 9) + '&status=' + (this.status ?? '')))
             .then(result => {
                 this.cats = result.data.map(cat => {
-                    return { ...cat, image: `data:image/${cat.imageFormat};base64,${cat.image}` };
+                    return { ...cat, encodedImage: `data:image/${cat.imageFormat};base64,${cat.encodedImage}` };
                 });
+                console.log(this.cats);
             })
             .catch(error => {
                 console.log(error);

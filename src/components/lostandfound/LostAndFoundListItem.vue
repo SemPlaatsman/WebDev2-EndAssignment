@@ -3,11 +3,11 @@
         <article :class="`border-3 card flex-fill ${this.statusToName(this.cat.status).toLowerCase()}`">
             <h3 class="text-center">{{ this.statusToName(this.cat.status).replace(/([a-z])([A-Z])/g, '$1 $2') }}</h3>
             <section class="card border-0 h-100 align-items-center">
-                <a href="/">
-                    <img :src="cat.image" alt="Cat cover">
+                <a :href="`/lostandfound/${cat.id}`">
+                    <img :src="cat.encodedImage" alt="Cat cover">
                 </a>
                 <section class="card-body w-100">
-                    <h5 class="card-title">{{ cat.breeds[0] }}</h5>
+                    <h5 class="card-title">{{ cat.breeds.join(", ") }}</h5>
                     <p class="card-text">{{ cat.description }}</p>
                 </section>
             </section>

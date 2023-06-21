@@ -1,7 +1,7 @@
 <template>
     <section v-if="cat" class="container d-flex justify-content-center row mx-auto p-4">
         <h2 class="text-center">{{ this.statusToName(this.cat.status).replace(/([a-z])([A-Z])/g, '$1 $2') }}</h2>
-        <img :src="`/jpg/cats/${cat.id}.${cat.imageFormat}`" alt="Cat cover">
+        <img :src="cat.encodedImage" alt="Cat cover">
         <div>
             <h4>Breeds</h4>
             <div class="col-8">
@@ -47,7 +47,7 @@ export default {
         loadCatData() {
             axiosTFFDB.get(("cats/" + this.$route.params.id))
             .then(response => {
-                this.cat = response.data
+                this.cat = { ...response.data, encodedImage: `data:image/${response.data.imageFormat};base64,${response.data.encodedImage}` }
                 console.log(this.cat)
             })
             .catch(error => {

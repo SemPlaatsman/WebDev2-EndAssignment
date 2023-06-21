@@ -6,37 +6,24 @@
             We understand how distressing it can be when a beloved feline companion goes missing or when you come across a stray cat in need of help. 
             So together, let's ensure that every furry friend finds their way back or discovers a new loving family!
         </p>
-        <div class="pt-2 px-2 actions-panel">
-            <a href="/lostandfound/report/lost">
-                <button class="btn text-white float-start lost">REPORT LOST</button>
-            </a>
-            <label for="page">Page: </label>
-            <input v-model="page" class="col-1 mx-3" min="1" type="number" id="page">
-            <label for="limit">Limit: </label>
-            <input v-model="limit" class="col-1 mx-3" min="1" type="number" id="limit">
-            <label for="status">Status: </label>
-            <select v-model="status" class="col-2 mx-3 p-1" id="status">
-                <option value="">All</option>
-                <option v-for="(value, name) in this.catStatus" :value="value">
-                    {{ name.replace(/([a-z])([A-Z])/g, '$1 $2') }}
-                </option>
-            </select>
-            <a href="/lostandfound/report/found">
-                <button class="btn text-white float-end found">REPORT FOUND</button>
-            </a>
-        </div>
+        <LostAndFoundActionsPanel :page="page" :limit="limit" :status="status"
+            @update:page="page = $event" @update:limit="limit = $event" @update:status="status = $event" />
         <LostAndFoundList :page="this.page" :limit="this.limit" :status="this.status" />
+        <LostAndFoundActionsPanel :page="page" :limit="limit" :status="status"
+            @update:page="page = $event" @update:limit="limit = $event" @update:status="status = $event" />
     </section>
 </template>
 
 <script>
 import { catStatus } from '../../assets/catstatus.js';
 import LostAndFoundList from './LostAndFoundList.vue';
+import LostAndFoundActionsPanel from './LostAndFoundActionsPanel.vue';
 
 export default {
     name: "LostAndFound",
     components: {
-        LostAndFoundList
+        LostAndFoundList,
+        LostAndFoundActionsPanel
     },
     data() {
         return {
