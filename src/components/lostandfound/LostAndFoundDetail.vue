@@ -1,7 +1,7 @@
 <template>
     <section v-if="cat" class="container d-flex justify-content-center row mx-auto p-4">
-        <h3 class="text-center">{{ this.statusToName(this.cat.status).replace(/([a-z])([A-Z])/g, '$1 $2') }}</h3>
-        <img :src="`/jpg/cats/${cat.id}.${cat.image_format}`" alt="Cat cover">
+        <h2 class="text-center">{{ this.statusToName(this.cat.status).replace(/([a-z])([A-Z])/g, '$1 $2') }}</h2>
+        <img :src="`/jpg/cats/${cat.id}.${cat.imageFormat}`" alt="Cat cover">
         <div>
             <h4>Breeds</h4>
             <div class="col-8">

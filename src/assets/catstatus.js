@@ -11,8 +11,16 @@ function statusToName(status) {
             return name;
         }
     }
-    return "Unknown";
+    return null;
 }
 
+function nameToStatus(statusName) {
+    for (const [name, value] of Object.entries(catStatus)) {
+        if (name.toLowerCase() === statusName.toLowerCase()) {
+            return value;
+        }
+    }
+    return null;
+}
 
-export { catStatus, statusToName }
+export { catStatus, statusToName, nameToStatus }

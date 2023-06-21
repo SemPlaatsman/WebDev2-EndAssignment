@@ -4,7 +4,7 @@
             <h3 class="text-center">{{ this.statusToName(this.cat.status).replace(/([a-z])([A-Z])/g, '$1 $2') }}</h3>
             <section class="card border-0 h-100 align-items-center">
                 <a href="/">
-                    <img :src="`/jpg/cats/${cat.id}.${cat.image_format}`" alt="Cat cover">
+                    <img :src="cat.image" alt="Cat cover">
                 </a>
                 <section class="card-body w-100">
                     <h5 class="card-title">{{ cat.breeds[0] }}</h5>

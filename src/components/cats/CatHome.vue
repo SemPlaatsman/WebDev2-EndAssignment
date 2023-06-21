@@ -5,7 +5,7 @@
             Looking for a new four-legged roommate? The Felis Foundation can help you find the perfect match with everything we know about our little friends. 
             Don't wait; our cats are looking forward to meet you.
         </p>
-        <div class="py-2">
+        <div class="py-2 actions-panel">
             <label for="page">Page: </label>
             <input v-model="page" class="col-1 mx-3" min="1" type="number" id="page">
             <label for="limit">Limit: </label>
