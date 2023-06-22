@@ -21,8 +21,8 @@ const router = createRouter({
     { path: '/cats/:id', component: CatDetail },
     { path: '/lostandfound', component: LostAndFound },
     { path: '/lostandfound/:id(\\d+)', component: LostAndFoundDetail },
-    { path: '/lostandfound/report', component: LostAndFoundReport },
-    { path: '/lostandfound/report/:status', component: LostAndFoundReport },
+    { path: '/lostandfound/report', component: LostAndFoundReport, meta: { requiresAuth: true } },
+    { path: '/lostandfound/report/:status', component: LostAndFoundReport, meta: { requiresAuth: true } },
     { path: '/profile', component: Profile, meta: { requiresAuth: true } }
   ],
   linkActiveClass: "active"

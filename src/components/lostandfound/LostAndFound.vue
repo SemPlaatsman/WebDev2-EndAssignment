@@ -6,6 +6,15 @@
             We understand how distressing it can be when a beloved feline companion goes missing or when you come across a stray cat in need of help. 
             So together, let's ensure that every furry friend finds their way back or discovers a new loving family!
         </p>
+        <p v-if="!store.isAuthenticated">
+            <span class="text-error-red">
+                !!!
+            </span>
+                If you want to report a cat as missing, found, etc... you need to be logged in
+            <span class="text-error-red">
+                !!!
+            </span>
+        </p>
         <LostAndFoundActionsPanel :page="page" :limit="limit" :status="status"
             @update:page="page = $event" @update:limit="limit = $event" @update:status="status = $event" />
         <LostAndFoundList :page="this.page" :limit="this.limit" :status="this.status" />
@@ -15,6 +24,7 @@
 </template>
 
 <script>
+import { userAuthStore } from '../../stores/auth-store.js';
 import { catStatus } from '../../assets/catstatus.js';
 import LostAndFoundList from './LostAndFoundList.vue';
 import LostAndFoundActionsPanel from './LostAndFoundActionsPanel.vue';
@@ -30,7 +40,8 @@ export default {
             page: 1,
             limit: 9,
             status: '',
-            catStatus
+            catStatus,
+            store: userAuthStore()
         }
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <div class="pt-2 px-2 actions-panel">
-      <a href="/lostandfound/report/lost">
+      <a href="/lostandfound/report/lost" v-if="store.isAuthenticated">
         <button class="btn text-white float-start lost pb-1">REPORT LOST</button>
       </a>
       <label for="page">Page: </label>
@@ -14,13 +14,14 @@
           {{ name.replace(/([a-z])([A-Z])/g, '$1 $2') }}
         </option>
       </select>
-      <a href="/lostandfound/report/found">
+      <a href="/lostandfound/report/found" v-if="store.isAuthenticated">
         <button class="btn text-white float-end found pb-1">REPORT FOUND</button>
       </a>
     </div>
   </template>
   
   <script>
+    import { userAuthStore } from '../../stores/auth-store.js';
   import { catStatus } from '../../assets/catstatus.js';
 
   export default {
@@ -28,7 +29,8 @@
     props: ['page', 'limit', 'status'],
     data() {
         return {
-            catStatus
+            catStatus,
+            store: userAuthStore()
         }
     },
     computed: {
