@@ -1,6 +1,6 @@
 <template>
     <section class="container d-flex flex-column pt-4 pb-1">
-        <div v-if="this.cat" class="col-12 justify-content-center pb-3">
+        <div v-if="this.cat" class="col-12 justify-content-center pb-4">
             <img :src="this.cat.url" alt="Cat cover">
         </div>
         <h2 class="text-center">Schedule your <span class="text-primary-green">appointment...</span></h2>
@@ -15,7 +15,8 @@
                 <div class="col-md-6 h-50">
                     <form @submit.prevent="submitAppointment" class="mb-3">
                         <div class="mb-3">
-                            <label for="inputDatetime" class="form-label text-primary-green fw-bold fs-4">Status</label>
+                            <label for="inputDatetime" class="form-label text-primary-green fw-bold fs-4 mb-0">Date & Time</label>
+                            <p class="mb-0">(at least one week into the future between 10:00 and 18:00)</p>
                             <input required  v-model="appointmentData.datetime" type="datetime-local" class="form-control" name="inputDatetime" id="inputDatetime">
                         </div>
                         <div class="d-flex align-items-center justify-content-center pb-3">
@@ -32,7 +33,7 @@
 </template>
 
 <script>
-import { axiosCatAPI } from '../../axios-auth';
+import { axiosCatAPI, axiosTFFDB } from '../../axios-auth';
 import { userAuthStore } from '../../stores/auth-store';
 
 export default {
@@ -43,27 +44,46 @@ export default {
             cat: null,
             store: userAuthStore(),
             appointmentData: {
-                datetime: ''
+                datetime: '2023-07-03T12:59:00'
             }
         }
     },
     watch: {
         'appointmentData.datetime'(newVal) {
-            if (!newVal || Date.parse(newVal) - Date.parse(new Date()) < (7 * 24 * 60 * 60 * 1000)) {
+            if (!newVal) {
                 this.appointmentData.datetime = '';
-                this.error = "Datetime must be at least one week into the future!"
             } else if (newVal.slice(2) != '00') {
                 this.appointmentData.datetime = newVal.slice(0, -2) + "00";
             }
         }
     },
     created() {
-        console.log(new Date());
         this.loadCatData();
     },
     methods: {
         submitAppointment() {
+            if (Date.parse(this.appointmentData.datetime) - Date.parse(new Date()) < (7 * 24 * 60 * 60 * 1000)) {
+                this.error = "Date & Time must be at least one week into the future!";
+                return;
+            } else if (new Date(this.appointmentData.datetime).getHours() < 10 || new Date(this.appointmentData.datetime).getHours() > 17) {
+                this.error = "Time must be between 10:00 and 18:00!";
+                return;
+            }
 
+            const appointmentRequestDTO = {
+                id: this.cat.id,
+                userId: this.store.id,
+                datetime: this.appointmentData.datetime.replace('T', ' ')
+            }
+            axiosTFFDB.post("/appointments", appointmentRequestDTO)
+                .then(response => {
+                    this.$router.push('/profile');
+                })
+                .catch(error => {
+                    this.error = error.response.data.errorMessage ?? "Something went wrong while trying to make an appointment";
+                });
+
+            this.error = '';
         },
         loadCatData() {
           axiosCatAPI.get(("images/" + this.$route.params.id))

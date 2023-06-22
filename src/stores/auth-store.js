@@ -49,7 +49,7 @@ export const userAuthStore = defineStore('auth', {
                     resolve();
                 })
                 .catch(error => {
-                    reject(error.response.data.errorMessage);
+                    reject(error.response.data.errorMessage ?? "Something went wrong while trying to login!");
                 });
             });
         },

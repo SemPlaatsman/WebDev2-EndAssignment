@@ -11,6 +11,9 @@
         </div>
         
         <LostAndFoundListItem v-else="this.cats.length > 0" v-for="cat in cats" :cat="cat" :key="cat.id"/>
+        <div class="alert alert-danger" role="alert" v-if="error">
+            {{ this.error }}
+        </div>
     </section>
 </template>
 
@@ -45,7 +48,8 @@ export default {
     },
     data() {
         return {
-            cats: null
+            cats: null,
+            error: ''
         }
     },
     watch: {
@@ -85,7 +89,7 @@ export default {
                 console.log(this.cats);
             })
             .catch(error => {
-                console.log(error);
+                this.error = error.response.data.errorMessage ?? "Something went wrong while trying to load all cats!";
             })
         }
     }

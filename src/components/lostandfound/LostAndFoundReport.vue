@@ -109,7 +109,7 @@ export default {
                 })
                 .catch(error => {
                     console.log(error);
-                    this.error = error.data.errorMessage;
+                    this.error = error.response.data.errorMessage ?? "Something went wrong while trying report a cat!";
                 })
             };
         },

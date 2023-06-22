@@ -53,10 +53,10 @@ router.beforeEach((to, from, next) => {
     return;
   } else if (tffdbCatExists) {
     axiosTFFDB.get(('cats/' + to.params.id))
-      .then(response => {
+      .then(() => {
         next()
       })
-      .catch(error => {
+      .catch(() => {
         next("/lostandfound");
       });
     return;

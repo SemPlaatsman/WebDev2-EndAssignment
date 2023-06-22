@@ -23,7 +23,7 @@ export default {
         }
     },
     mounted() {
-        axiosTFFDB.get('appointments')
+        axiosTFFDB.get('cats/1000')
         .then(result => console.log(result))
         .catch(error => console.log(error));
     }
