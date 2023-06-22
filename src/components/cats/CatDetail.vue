@@ -73,7 +73,7 @@
               console.log(this.cat)
             })
             .catch(error => {
-              this.error = error.response.data ?? "Something went wrong while trying to load a cat with id " + this.$route.params.id + ". <br>Please try again...";
+                this.error = error.response.data ?? "Something went wrong while trying to load a cat with id " + this.$route.params.id + ". <br>Please try again...";
             })
         }
     }

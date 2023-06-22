@@ -6,8 +6,8 @@
                     <img :src="cat.url" alt="Cat cover">
                 </a>
                 <section class="card-body w-100">
-                    <h5 class="card-title">{{ cat.breeds[0].name }}</h5>
-                    <p class="card-text">{{ cat.breeds[0].temperament }}</p>
+                    <h5 class="card-title">{{ cat.breeds.map(breed => breed.name).join(', ') }}</h5>
+                    <p class="card-text">{{ cat.breeds.map(breed => breed.temperament).join(', ') }}</p>
                 </section>
             </section>
             <section class="card-footer d-flex w-100">

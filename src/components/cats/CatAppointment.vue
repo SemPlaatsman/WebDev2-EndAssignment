@@ -73,13 +73,14 @@ export default {
             const appointmentRequestDTO = {
                 id: this.cat.id,
                 userId: this.store.id,
-                datetime: this.appointmentData.datetime.replace('T', ' ')
+                datetime: (this.appointmentData.datetime.replace('T', ' ') + ':00')
             }
             axiosTFFDB.post("/appointments", appointmentRequestDTO)
                 .then(response => {
                     this.$router.push('/profile');
                 })
                 .catch(error => {
+                    console.log(error);
                     this.error = error.response.data.errorMessage ?? "Something went wrong while trying to make an appointment";
                 });
 

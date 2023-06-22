@@ -9,11 +9,13 @@
                         <input required id="inputEmail" type="text" class="form-control" v-model="user.email" />
                     </div>
                     <div class="mb-3">
-                        <label for="inputUsername" class="form-label text-primary-green fw-bold fs-4">Username</label>
+                        <label for="inputUsername" class="form-label text-primary-green fw-bold fs-4 mb-0">Username</label>
+                        <p class="mb-0">(of at least 3 characters long...)</p>
                         <input required id="inputUsername" type="text" class="form-control" v-model="user.username" />
                     </div>
                     <div class="mb-3">
-                        <label for="inputPassword" class="form-label text-primary-green fw-bold fs-4">Password</label>
+                        <label for="inputPassword" class="form-label text-primary-green fw-bold fs-4 mb-0">Password</label>
+                        <p class="mb-0">(of at least 6 characters long...)</p>
                         <input required type="password" class="form-control" id="inputPassword" v-model="user.password" />
                     </div>
                     <div class="d-flex align-items-center justify-content-center">
