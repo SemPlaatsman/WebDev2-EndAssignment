@@ -1,8 +1,20 @@
 <template>
-  <section v-if="cat" class="container d-flex justify-content-center align-content-start row mx-auto p-4">
+  <section v-if="cat" class="container d-flex justify-content-center align-content-start row mx-auto p-4 pt-2">
+    <h1 class="text-center">Meet our feline friend</h1>
     <img :src="cat.url" alt="Cat cover"/>
-    <h4></h4>
-    <div class="py-3">
+    <div class="col-12 pt-3 d-flex justify-content-center">
+      <a v-if="store.isAuthenticated" :href="`/cats/${cat.id}/appointment`" class="btn text-white">Make adoption appointment</a>
+      <p v-else>
+        <span class="text-error-red">
+            !!!
+        </span>
+            If you want to make an appointment to adopt a cat you need to be logged in
+        <span class="text-error-red">
+            !!!
+        </span>
+      </p>
+    </div>
+    <div class="py-3 col-12">
       <h4>Breeds</h4>
       <dl class="row col-12" v-for="(breed, index) in cat.breeds">
         <details :open="cat.breeds.length < 3" class="row">
@@ -20,6 +32,7 @@
         </details>
       </dl>
     </div>
+    
     <div class="alert alert-danger mt-3 error-message" role="alert" v-if="error">
       {{ this.error }}
     </div>
@@ -27,6 +40,7 @@
 </template>
   
 <script>
+  import { userAuthStore } from '../../stores/auth-store';
   import { axiosCatAPI } from '../../axios-auth';
   
   export default {
@@ -40,7 +54,8 @@
     data() {
       return {
         error: null,
-        cat: null
+        cat: null,
+        store: userAuthStore()
       }
     },
     created() {
@@ -67,6 +82,7 @@
   
 <style scoped>
 .container > img {
+  width: 50%;
   max-width: 50%;
   max-height: 33vh;
   height: auto;
@@ -75,5 +91,9 @@
 
 dl dt {
   color: var(--primary-green);
+}
+
+a.btn {
+  background-color: var(--primary-green);
 }
 </style>
