@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { userAuthStore } from '../stores/auth-store';
 import { axiosTFFDB } from '../axios-auth';
 
 export default {
@@ -42,19 +43,25 @@ export default {
                 email: "",
                 username: "",
                 password: "",
-                role: 1
+                role: 0
             },
-            errorMessage: ""
+            errorMessage: "",
+            store: userAuthStore()
         };
     },
     methods: {
         async register() {
-            await axiosTFFDB.post('users/register', this.user)
-            .then((res) => {
-                console.log(res);
+            axiosTFFDB.post('users/register', this.user)
+            .then(async () => {
+                try {
+                    await this.store.login(this.user.username, this.user.password);
+                    this.$router.push('/');
+                } catch (error) {
+                    this.errorMessage = error.code === "ERR_NETWORK" ? "Backend failed to initialize!" : error;
+                }
             }).catch((error) => {
-                this.errorMessage = error.response.data.errorMessage;
-            })
+                this.errorMessage = error.code === "ERR_NETWORK" ? "Backend failed to initialize!" : (error.response.data.errorMessage ?? "Failed to register! Please try again...");
+            });
         }
     }
 }

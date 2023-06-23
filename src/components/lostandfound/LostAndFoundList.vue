@@ -1,7 +1,6 @@
 <template>
     <section class="container row mx-auto py-4 px-0">
         <Loading v-if="this.cats === null"/>
-        <!-- TODO: if no cats found so cats.length === 0; show a no cats found message -->
         <div v-else-if="this.cats.length === 0">
             <h1 class="text-center text-primary-green p-5 pb-0">Sorry!</h1>
             <p class="text-center pb-5">
@@ -89,7 +88,7 @@ export default {
                 console.log(this.cats);
             })
             .catch(error => {
-                this.error = error.response.data.errorMessage ?? "Something went wrong while trying to load all cats!";
+                this.error = error.code === "ERR_NETWORK" ? "Backend failed to initialize!" : (error.response.data.errorMessage ?? "Something went wrong while trying to load all cats!");
             })
         }
     }

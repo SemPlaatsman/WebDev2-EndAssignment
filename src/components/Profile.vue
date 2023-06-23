@@ -18,7 +18,6 @@
         <h2>Reported cats:</h2>
         <section class="container row mx-auto p-0 pb-3 text-start">
             <Loading v-if="this.cats === null"/>
-            <!-- TODO: if no cats found so cats.length === 0; show a no cats found message -->
             <div v-else-if="this.cats.length === 0">
                 <h1 class="text-center text-primary-green p-5 pb-0">Sorry!</h1>
                 <p class="text-center pb-5">
@@ -35,12 +34,11 @@
         <h2>Appointments:</h2>
         <section class="container row mx-auto p-0 pb-3 text-start">
             <Loading v-if="this.appointments === null"/>
-            <!-- TODO: if no cats found so cats.length === 0; show a no cats found message -->
             <div v-else-if="this.appointments.length === 0">
                 <h1 class="text-center text-primary-green p-5 pb-0">Sorry!</h1>
                 <p class="text-center pb-5">
-                    I'm sorry but there are no cats to be found here...<br>
-                    Have you looked under the couch?
+                    I'm sorry but there are no appointments to be found here...<br>
+                    Take a look at our <a href="/cats" class="text-primary-green">Cats page</a> to make an appointment!
                 </p>
             </div>
             <section class="col-lg-4 col-md-6 col-sm-12 p-2 d-flex align-items-stretch" v-else="this.appointments.length > 0" v-for="appointment in appointments" :key="appointment.id">
@@ -107,7 +105,7 @@ export default {
                 console.log(this.cats);
             })
             .catch(error => {
-                this.error = error.response.data.errorMessage ?? "Something went wrong while trying to load all cats!";
+                this.error = error.code === "ERR_NETWORK" ? "Backend failed to initialize!" : (error.response.data.errorMessage ?? "Something went wrong while trying to load all cats!");
             })
         },
         async getAppointments() {
@@ -121,7 +119,7 @@ export default {
                 this.appointments = await Promise.all(appointmentPromises);
                 console.log(this.appointments);
             } catch (error) {
-                this.error = error.response?.data?.errorMessage ?? "Something went wrong while trying to load all cats!";
+                this.error = error.code === "ERR_NETWORK" ? "Backend failed to initialize!" : (error.response.data.errorMessage ?? "Something went wrong while trying to load all cats!");
             }
         },
         async getAPICat($id) {
@@ -131,7 +129,7 @@ export default {
                 return response.data;
             } catch (error) {
                 console.log(error)
-                this.error = error.response?.data ?? "Something went wrong while trying to load a cat with id " + $id + ". <br>Please try again...";
+                this.error = error.code === "ERR_NETWORK" ? "Backend failed to initialize!" : (error.response?.data ?? "Something went wrong while trying to load a cat with id " + $id + ". <br>Please try again...");
             }
         }
     }

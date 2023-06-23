@@ -53,7 +53,7 @@ export default {
                 await this.store.login(this.username, this.password);
                 this.$router.push('/');
             } catch (error) {
-                this.errorMessage = error;
+                this.errorMessage = error.code === "ERR_NETWORK" ? "Backend failed to initialize!" : error;
             }
         }
     }

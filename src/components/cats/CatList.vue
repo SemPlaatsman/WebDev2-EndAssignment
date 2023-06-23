@@ -2,6 +2,9 @@
     <section class="container row mx-auto py-4 border-black">
         <Loading v-if="this.cats.length === 0"/>
         <CatListItem v-else="this.cats.length > 0" v-for="cat in cats" :cat="cat" :key="cat.id"/>
+        <div class="alert alert-danger mt-3" role="alert" v-if="error">
+            {{ this.error }}
+        </div>
     </section>
 </template>
 
@@ -30,7 +33,8 @@ export default {
     },
     data() {
         return {
-            cats: []
+            cats: [],
+            error: ''
         }
     },
     watch: {
@@ -62,7 +66,7 @@ export default {
                 });
                 this.cats = cats;
             } catch (error) {
-                console.log(error)
+                this.error = error.code === "ERR_NETWORK" ? "Backend failed to initialize!" : (error.response.data.errorMessage ?? "Something went wrong while trying to load all cats!");
             }
         }
     }

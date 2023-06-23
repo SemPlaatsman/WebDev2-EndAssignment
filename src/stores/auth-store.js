@@ -49,7 +49,7 @@ export const userAuthStore = defineStore('auth', {
                     resolve();
                 })
                 .catch(error => {
-                    reject(error.response.data.errorMessage ?? "Something went wrong while trying to login!");
+                    reject(error.code === "ERR_NETWORK" ? "Backend failed to initialize!" : (error.response.data ? error.response.data.errorMessage : "Something went wrong while trying to login!"));
                 });
             });
         },

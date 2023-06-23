@@ -1,14 +1,11 @@
 # WebDev2-EndAssignment
 
-This template should help get you started developing with Vue 3 in Vite.
+This is the frontend of Sem Plaatsman's final assignment for Web Development 2. The database creation script is in the REST-API folder.
 
-## Recommended IDE Setup
+## User accounts
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+[![User Accounts](useraccounts.png)](https://ray.so/#code=Y29uc3QgY3VzdG9tZXJBY2NvdW50czogewogIFsKICAgIHsKICAgICAgInVzZXJuYW1lIjogInNlbXBsIiwKICAgICAgInBhc3N3b3JkIjogInNlbTEyMyIKICAgIH0sCiAgICB7CiAgICAgICJ1c2VybmFtZSI6ICJhaHJudWxkIiwKICAgICAgInBhc3N3b3JkIjogIm1hcmsxMjMiCiAgICB9CiAgXQp9OwoKY29uc3QgZW1wbG95ZWVBY2NvdW50czogewogIFsKICAgIHsKICAgICAgInVzZXJuYW1lIjogImRldiIsCiAgICAgICJwYXNzd29yZCI6ICJkZXYxMjMiCiAgICB9CiAgXQp9OwoKYXBwbGljYXRpb24udGVzdFdpdGgoY3VzdG9tZXJBY2NvdW50cywgZW1wbG95ZWVBY2NvdW50cyk7CmNvbnN0IGFzc2Vzc21lbnQgPSBuZXcgQXNzZXNzbWVudChhcHBsaWNhdGlvbik7CmFzc2Vzc21lbnQuZ3JhZGUgPSAxMDs&darkMode=true&background=true&theme=breeze&language=javascript)
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ## Project Setup
 
@@ -20,10 +17,4 @@ npm install
 
 ```sh
 npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
 ```

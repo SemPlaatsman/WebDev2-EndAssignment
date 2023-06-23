@@ -1,7 +1,7 @@
 <template>
     <section class="col-lg-4 col-md-6 col-sm-12 p-2 d-flex align-items-stretch">
         <article :class="`border-3 card flex-fill ${this.statusToName(this.cat.status).toLowerCase()}`">
-            <h3 class="text-center">{{ this.statusToName(this.cat.status).replace(/([a-z])([A-Z])/g, '$1 $2') }}</h3>
+            <h3 class="text-center">{{ this.statusToName(this.cat.status).fromCamelToRegularCase() }}</h3>
             <section class="card border-0 h-100 align-items-center">
                 <a :href="`/lostandfound/${cat.id}`">
                     <img :src="cat.encodedImage" alt="Cat cover">

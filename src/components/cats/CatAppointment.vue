@@ -81,7 +81,7 @@ export default {
                 })
                 .catch(error => {
                     console.log(error);
-                    this.error = error.response.data.errorMessage ?? "Something went wrong while trying to make an appointment";
+                    this.error = error.code === "ERR_NETWORK" ? "Backend failed to initialize!" : (error.response.data.errorMessage ?? "Something went wrong while trying to make an appointment");
                 });
 
             this.error = '';
@@ -93,7 +93,7 @@ export default {
                 console.log(this.cat)
             })
             .catch(error => {
-                this.error = error.response.data ?? "Something went wrong while trying to load a cat with id " + this.$route.params.id + ". <br>Please try again...";
+                this.error = error.code === "ERR_NETWORK" ? "Backend failed to initialize!" : (error.response.data ?? "Something went wrong while trying to load a cat with id " + this.$route.params.id + ". <br>Please try again...");
             })
         }
     }

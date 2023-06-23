@@ -1,6 +1,6 @@
 <template>
     <section v-if="cat" class="container d-flex justify-content-center align-content-start row mx-auto p-4 pt-2">
-        <h1 class="text-center"><span v-if="typeof cat.status == 'number'" :class="statusToName(cat.status).toLowerCase()">{{ this.statusToName(this.cat.status).replace(/([a-z])([A-Z])/g, '$1 $2') }}</span> cat</h1>
+        <h1 class="text-center"><span v-if="typeof cat.status == 'number'" :class="statusToName(cat.status).toLowerCase()">{{ this.statusToName(this.cat.status).fromCamelToRegularCase() }}</span> cat</h1>
         <img :src="cat.encodedImage" alt="Cat cover">
         <div class="col-md-12 pb-3 pt-5">
             <p class="text-center">Know anything about this feline? Send an email to <a :href="`mailto:${cat.userEmail}`">{{ cat.userEmail }}</a> </p>
@@ -55,7 +55,7 @@ export default {
                 console.log(this.cat)
             })
             .catch(error => {
-                this.error = error.response.data ?? "Something went wrong while trying to load a cat with id " + this.$route.params.id + ". <br>Please try again...";
+                this.error = error.code === "ERR_NETWORK" ? "Backend failed to initialize!" : (error.response.data ?? "Something went wrong while trying to load a cat with id " + this.$route.params.id + ". <br>Please try again...");
             })
         }
     }

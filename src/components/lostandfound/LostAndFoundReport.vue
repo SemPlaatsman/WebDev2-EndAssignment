@@ -16,7 +16,7 @@
                             <select required v-model="reportData.status" class="form-control" id="inputStatus">
                                 <option value="" selected disabled>Please select an option:</option>
                                 <option v-for="(value, name) in this.catStatus" :value="value">
-                                    {{ name.replace(/([a-z])([A-Z])/g, '$1 $2') }}
+                                    {{ name.fromCamelToRegularCase() }}
                                 </option>
                             </select>
                         </div>
@@ -109,7 +109,7 @@ export default {
                 })
                 .catch(error => {
                     console.log(error);
-                    this.error = error.response.data.errorMessage ?? "Something went wrong while trying report a cat!";
+                    this.error = error.code === "ERR_NETWORK" ? "Backend failed to initialize!" : (error.response.data.errorMessage ?? "Something went wrong while trying report a cat!");
                 })
             };
         },

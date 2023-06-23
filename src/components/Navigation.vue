@@ -7,30 +7,29 @@
       <li class="nav-item"><router-link to="/" class="nav-link">HOME</router-link></li>
       <li class="nav-item"><router-link to="/cats" class="nav-link">CATS</router-link></li>
       <li class="nav-item"><router-link to="/lostandfound" class="nav-link">LOST & FOUND</router-link></li>
-      <li v-if="isAuthenticated" class="nav-item"><router-link to="/profile" class="nav-link">PROFILE</router-link></li>
-      <li v-if="isAuthenticated" class="nav-item"><a v-on:click="logout" href="#" class="nav-link">LOGOUT</a></li>
-      <li v-if="!isAuthenticated" class="nav-item"><router-link to="/login" class="nav-link">LOGIN</router-link></li>
-      <li v-if="!isAuthenticated" class="nav-item"><router-link to="/register" class="nav-link">REGISTER</router-link></li>
+      <li v-if="store.isAuthenticated && store.role == roles.Employee" class="nav-item"><router-link to="/dashboard" class="nav-link">DASHBOARD</router-link></li>
+      <li v-if="store.isAuthenticated" class="nav-item"><router-link to="/profile" class="nav-link">PROFILE</router-link></li>
+      <li v-if="store.isAuthenticated" class="nav-item"><a v-on:click="logout" href="#" class="nav-link">LOGOUT</a></li>
+      <li v-if="!store.isAuthenticated" class="nav-item"><router-link to="/login" class="nav-link">LOGIN</router-link></li>
+      <li v-if="!store.isAuthenticated" class="nav-item"><router-link to="/register" class="nav-link">REGISTER</router-link></li>
     </ul>
   </nav>
 </template>
 
 <script>
+import { roles } from '../assets/role.js'
 import { userAuthStore } from '../stores/auth-store';
 
 export default {
   name: "Navigation",
-  setup() {
-    const store = userAuthStore();
-    store.autoLogin();
-    return { store }
-  },
   data() {
     return {
-        
+        store: userAuthStore(),
+        roles
     }
   },
   mounted() {
+    console.log(this.store.isAuthenticated && this.store.role == roles.Employee)
     console.log(this.store);
     console.log(this.isAuthenticated);
   },
@@ -38,11 +37,6 @@ export default {
     logout() {
       this.store.logout();
       this.$router.push('/');
-    }
-  },
-  computed: {
-    isAuthenticated() {
-      return this.store.isAuthenticated;
     }
   }
 }

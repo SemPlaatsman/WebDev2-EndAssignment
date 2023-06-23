@@ -11,7 +11,7 @@
       <select v-model="localStatus" class="col-2 mx-3 p-1" id="status">
         <option value="">All</option>
         <option v-for="(value, name) in catStatus" :value="value">
-          {{ name.replace(/([a-z])([A-Z])/g, '$1 $2') }}
+          {{ name.fromCamelToRegularCase() }}
         </option>
       </select>
       <a href="/lostandfound/report/found" v-if="store.isAuthenticated">
